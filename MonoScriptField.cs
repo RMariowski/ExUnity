@@ -1,25 +1,28 @@
 ﻿using UnityEngine;
 
-[System.Serializable]
-public class MonoScriptField
+namespace ExUnity
 {
-    #region Fields
-
-    [SerializeField] private Object _scriptAsset;
-
-    [SerializeField] private string _scriptName = "";
-
-    #endregion
-
-    #region Properties
-
-    /// <summary>
-    /// Returns script name.
-    /// </summary>
-    public string ScriptName
+    [System.Serializable]
+    public class MonoScriptField
     {
-        get { return _scriptName; }
-    }
+        #region Fields
 
-    #endregion
+        [SerializeField] private Object _scriptAsset;
+
+        [SerializeField] private string _scriptName = "";
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Returns script name.
+        /// </summary>
+        public string ScriptName
+        {
+            get { return _scriptName; }
+        }
+
+        #endregion
+    }
 }
