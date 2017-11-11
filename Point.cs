@@ -15,7 +15,7 @@ namespace ExUnity
         #region Constructor
 
         /// <summary>
-        /// Constructor. 
+        /// Constructor
         /// </summary>
         /// <param name="x">X</param>
         /// <param name="y">Y</param>
