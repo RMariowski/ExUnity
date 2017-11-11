@@ -5,8 +5,8 @@ public class Pair<TF, TS>
 {
     #region Fields
 
-    public TF first;
-    public TS second;
+    public TF First;
+    public TS Second;
 
     #endregion
 
@@ -17,7 +17,6 @@ public class Pair<TF, TS>
     /// </summary>
     public Pair()
     {
-
     }
 
     #endregion
@@ -31,8 +30,8 @@ public class Pair<TF, TS>
     /// <param name="second">second value/object</param>
     public Pair(TF first, TS second)
     {
-        this.first = first;
-        this.second = second;
+        First = first;
+        Second = second;
     }
 
     #endregion

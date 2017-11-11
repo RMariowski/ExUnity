@@ -35,7 +35,7 @@ public static class Helpers
     {
         var result = new Texture2D(width, height);
         var colors = new Color[4];
-        for (int i = 0; i < 4; i++)
+        for (var i = 0; i < 4; i++)
             colors[i] = color;
         result.SetPixels(colors);
         result.Apply();

@@ -5,8 +5,8 @@ public struct Point
 {
     #region Fields
 
-    public int x;
-    public int y;
+    public int X;
+    public int Y;
 
     #endregion
 
@@ -19,8 +19,8 @@ public struct Point
     /// <param name="y">Y</param>
     public Point(int x, int y)
     {
-        this.x = x;
-        this.y = y;
+        X = x;
+        Y = y;
     }
 
     #endregion
@@ -34,14 +34,14 @@ public struct Point
     /// <param name="offsetY">Y</param>
     public void Offset(int offsetX, int offsetY)
     {
-        x += offsetX;
-        y += offsetY;
+        X += offsetX;
+        Y += offsetY;
     }
 
     #endregion
 
     #region Equals
-    
+
     /// <summary>
     /// Checks if points are the same.
     /// </summary>
@@ -50,13 +50,13 @@ public struct Point
     /// <returns>true if points are the same</returns>
     public static bool Equals(Point point1, Point point2)
     {
-        return point1.x.Equals(point2.x) && point1.y.Equals(point2.y);
+        return point1.X.Equals(point2.X) && point1.Y.Equals(point2.Y);
     }
 
     #endregion
 
     #region Equals
-   
+
     /// <summary>
     /// Checks if point is equal to object.
     /// </summary>
@@ -66,7 +66,7 @@ public struct Point
     {
         if (!(obj is Point))
             return false;
-        return Equals(this, (Point)obj);
+        return Equals(this, (Point) obj);
     }
 
     #endregion
@@ -86,14 +86,14 @@ public struct Point
     #endregion
 
     #region Get Hash Code
-    
+
     /// <summary>
     /// Returns hash code of point.
     /// </summary>
     /// <returns></returns>
     public override int GetHashCode()
     {
-        return x.GetHashCode() ^ y.GetHashCode();
+        return X.GetHashCode() ^ Y.GetHashCode();
     }
 
     #endregion
@@ -108,7 +108,7 @@ public struct Point
     /// <returns></returns>
     public static bool operator ==(Point point1, Point point2)
     {
-        return point1.x == point2.x && point1.y == point2.y;
+        return point1.X == point2.X && point1.Y == point2.Y;
     }
 
     #endregion

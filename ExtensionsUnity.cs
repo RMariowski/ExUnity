@@ -53,7 +53,7 @@ public static class ExtensionsUnity
     /// <returns>Vector2 if successful</returns>
     public static Vector2 ToVector(this Point point)
     {
-        return new Vector2(point.x, point.y);
+        return new Vector2(point.X, point.Y);
     }
 
     #endregion

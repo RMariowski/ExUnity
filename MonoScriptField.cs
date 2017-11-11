@@ -4,12 +4,10 @@
 public class MonoScriptField
 {
     #region Fields
-  
-    [SerializeField]
-    private Object _scriptAsset;
 
-    [SerializeField]
-    private string _scriptName = "";
+    [SerializeField] private Object _scriptAsset;
+
+    [SerializeField] private string _scriptName = "";
 
     #endregion
 
@@ -18,7 +16,10 @@ public class MonoScriptField
     /// <summary>
     /// Returns script name.
     /// </summary>
-    public string ScriptName { get { return _scriptName; } }
+    public string ScriptName
+    {
+        get { return _scriptName; }
+    }
 
     #endregion
 }

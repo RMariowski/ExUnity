@@ -5,11 +5,9 @@ public class SceneField
 {
     #region Fields
 
-    [SerializeField]
-    private Object _sceneAsset;
+    [SerializeField] private Object _sceneAsset;
 
-    [SerializeField]
-    private string _sceneName = "";
+    [SerializeField] private string _sceneName = "";
 
     #endregion
 
@@ -18,7 +16,10 @@ public class SceneField
     /// <summary>
     /// Returns scene name.
     /// </summary>
-    public string SceneName { get { return _sceneName; } }
+    public string SceneName
+    {
+        get { return _sceneName; }
+    }
 
     #endregion
 
