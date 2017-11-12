@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ExUnity
 {
-    public abstract class Language
+    public abstract class Language : IDisposable
     {
         #region Indexer
 
@@ -17,7 +18,7 @@ namespace ExUnity
 
         #region Fields
 
-        protected readonly IDictionary<string, string> Items = new Dictionary<string, string>();
+        protected readonly Dictionary<string, string> Items = new Dictionary<string, string>();
 
         #endregion
 
@@ -42,9 +43,10 @@ namespace ExUnity
         #region Initialize
 
         /// <summary>
-        ///  
+        /// Initializes language.
+        /// NOTE: When you override it, don't forget to set IsInitialized to true, when everything goes well.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if initialization was successful, false otherwise.</returns>
         public abstract bool Initialize();
 
         #endregion
@@ -55,10 +57,19 @@ namespace ExUnity
         /// Adds item with specified key. If key already exists, overrides item.
         /// </summary>
         /// <param name="key">Key of the item</param>
-        /// <param name="item">Item</param>
+        /// <param name="item">Value of language item</param>
         public void AddItem(string key, string item)
         {
             Items[key] = item;
+        }
+
+        /// <summary>
+        /// Adds language item. If language item already exists, overrides it.
+        /// </summary>
+        /// <param name="languageItem">Language item to add.</param>
+        public void AddItem(LanguageItem languageItem)
+        {
+            AddItem(languageItem.First, languageItem.Second);
         }
 
         #endregion
@@ -66,13 +77,15 @@ namespace ExUnity
         #region Get Item
 
         /// <summary>
-        /// 
+        /// Gets item of language.
         /// </summary>
-        /// <param name="itemKey"></param>
-        /// <returns></returns>
+        /// <param name="itemKey">Item's key to get</param>
+        /// <returns>Value of language item if key exists. Otherwise it returns "[[KEY]]".</returns>
         public string GetItem(string itemKey)
         {
-            return !IsInitialized ? string.Empty : Items[itemKey];
+            if (!IsInitialized)
+                throw new Exception("Language not initialized.");
+            return Items.ContainsKey(itemKey) ? Items[itemKey] : string.Format("[[{0}]]", itemKey);
         }
 
         #endregion
@@ -80,13 +93,37 @@ namespace ExUnity
         #region Set Item
 
         /// <summary>
-        /// Sets item with specified key. If key doesn't exists, adds item.
+        /// Sets language item with specified key. If key doesn't exists, adds item.
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="item"></param>
+        /// <param name="key">Key of language item</param>
+        /// <param name="item">Value of language item</param>
         public void SetItem(string key, string item)
         {
             Items[key] = item;
+        }
+
+        /// <summary>
+        /// Sets language item.
+        /// </summary>
+        /// <param name="languageItem">Language item to set</param>
+        public void SetItem(LanguageItem languageItem)
+        {
+            SetItem(languageItem.First, languageItem.Second);
+        }
+
+        #endregion
+
+        #region Dispose
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Disposes language by clearing items and setting IsInitialized to false.
+        /// NOTE: Invoking this method is optional.
+        /// </summary>
+        public void Dispose()
+        {
+            Items.Clear();
+            IsInitialized = false;
         }
 
         #endregion

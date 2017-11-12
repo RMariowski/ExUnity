@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ExUnity
@@ -7,17 +8,18 @@ namespace ExUnity
     {
         #region Fields
 
-        private readonly IDictionary<SystemLanguage, Language> _languages =
-            new Dictionary<SystemLanguage, Language>();
+        private readonly Dictionary<SystemLanguage, Language> _languages = new Dictionary<SystemLanguage, Language>();
 
         #endregion
 
         #region Properties
 
-        public SystemLanguage SystemLanguage
+        public static SystemLanguage SystemLanguage
         {
             get { return Application.systemLanguage; }
         }
+
+        public SystemLanguage DefaultLanguage { get; set; }
 
         public Language CurrentLanguage { get; private set; }
 
@@ -30,6 +32,7 @@ namespace ExUnity
         /// </summary>
         private LanguageManager()
         {
+            DefaultLanguage = SystemLanguage.Unknown;
         }
 
         #endregion
@@ -37,11 +40,14 @@ namespace ExUnity
         #region Add Language
 
         /// <summary>
-        /// 
+        /// Adds language to list of supported languages.
         /// </summary>
-        /// <param name="language"></param>
+        /// <param name="language">Language to add</param>
         public void AddLanguage(Language language)
         {
+            if (language.Id == SystemLanguage.Unknown)
+                throw new Exception("Invalid language id");
+
             _languages[language.Id] = language;
         }
 
@@ -50,20 +56,10 @@ namespace ExUnity
         #region Is Language Supported
 
         /// <summary>
-        /// 
+        /// Checks whatever language is supported.
         /// </summary>
-        /// <param name="language"></param>
-        /// <returns></returns>
-        public bool IsLanguageSupported(Language language)
-        {
-            return language != null && IsLanguageSupported(language.Id);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="languageId"></param>
-        /// <returns></returns>
+        /// <param name="languageId">ID of language to check</param>
+        /// <returns>True if language is supported, false otherwise.</returns>
         private bool IsLanguageSupported(SystemLanguage languageId)
         {
             return _languages.ContainsKey(languageId);
@@ -77,12 +73,18 @@ namespace ExUnity
         /// Sets current language to specified one.
         /// </summary>
         /// <param name="languageId">Language id to set</param>
-        /// <param name="initializeNow"></param>
-        /// <returns></returns>
-        public bool SetCurrentLanguage(SystemLanguage languageId, bool initializeNow = true)
+        /// <param name="initializeNow">If true, then immediately initializes new current language</param>
+        /// <param name="releaseCurrent">If true, then releases current language</param>
+        /// <returns>True if new current language has been set successfully</returns>
+        public bool SetCurrentLanguage(SystemLanguage languageId, bool initializeNow = true,
+            bool releaseCurrent = true)
         {
             if (!IsLanguageSupported(languageId))
-                return false;
+            {
+                if (DefaultLanguage == SystemLanguage.Unknown)
+                    return false;
+                languageId = DefaultLanguage;
+            }
 
             var language = _languages[languageId];
             if (initializeNow && !language.IsInitialized)
@@ -90,6 +92,9 @@ namespace ExUnity
                 if (!language.Initialize())
                     return false;
             }
+
+            if (CurrentLanguage != null && releaseCurrent)
+                CurrentLanguage.Dispose();
 
             CurrentLanguage = language;
             return true;
@@ -100,13 +105,15 @@ namespace ExUnity
         #region Get Item
 
         /// <summary>
-        /// 
+        /// Gets item of language.
         /// </summary>
-        /// <param name="itemKey"></param>
-        /// <returns></returns>
+        /// <param name="itemKey">Item's key to get</param>
+        /// <returns>Value of language item if key exists. Otherwise it returns "[[KEY]]".</returns>
         public string GetItem(string itemKey)
         {
-            return CurrentLanguage == null ? string.Empty : CurrentLanguage[itemKey];
+            if (CurrentLanguage == null)
+                throw new Exception("Current language is not set.");
+            return CurrentLanguage[itemKey];
         }
 
         #endregion
