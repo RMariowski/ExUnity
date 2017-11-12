@@ -51,6 +51,14 @@ namespace ExUnity
             _languages[language.Id] = language;
         }
 
+        /// <summary>
+        /// Creates and adds language to list of supported languages.
+        /// </summary>
+        public void AddLanguage<T>() where T : Language, new()
+        {
+            AddLanguage(new T());
+        }
+
         #endregion
 
         #region Is Language Supported
