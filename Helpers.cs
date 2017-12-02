@@ -1,29 +1,9 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ExUnity
 {
     public static class Helpers
     {
-        #region Clamp
-
-        /// <summary>
-        /// Clamps value.
-        /// </summary>
-        /// <typeparam name="T">implements IComparable</typeparam>
-        /// <param name="value">specified value</param>
-        /// <param name="min">minimum value</param>
-        /// <param name="max">maximum value</param>
-        /// <returns>clamped value</returns>
-        public static T Clamp<T>(T value, T min, T max) where T : IComparable<T>
-        {
-            if (value.CompareTo(max) > 0)
-                return max;
-            return value.CompareTo(min) < 0 ? min : value;
-        }
-
-        #endregion
-
         #region Blank Image
 
         /// <summary>
