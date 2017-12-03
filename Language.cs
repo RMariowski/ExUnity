@@ -56,7 +56,7 @@ namespace ExUnity
         /// <summary>
         /// Adds item with specified key. If key already exists, overrides item.
         /// </summary>
-        /// <param name="key">Key of the item</param>
+        /// <param name="key"></param>
         /// <param name="item">Value of language item</param>
         public void AddItem(string key, string item)
         {
@@ -95,7 +95,7 @@ namespace ExUnity
         /// <summary>
         /// Sets language item with specified key. If key doesn't exists, adds item.
         /// </summary>
-        /// <param name="key">Key of language item</param>
+        /// <param name="key"></param>
         /// <param name="item">Value of language item</param>
         public void SetItem(string key, string item)
         {
