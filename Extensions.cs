@@ -1,9 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ExUnity
 {
     public static class Extensions
     {
+        #region Static Fields
+
+        private static readonly Random Random = new Random();
+
+        #endregion
+
         #region Convert to Byte
 
         /// <summary>
@@ -126,6 +133,26 @@ namespace ExUnity
         public static float ToFloat(this string str)
         {
             return str.ToSingle();
+        }
+
+        #endregion
+
+        #region Shuffle
+
+        /// <summary>
+        /// Real shuffle of List
+        /// </summary>
+        public static void Shuffle<T>(this IList<T> list)
+        {
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = Random.Next(n + 1);
+                var value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
         }
 
         #endregion
