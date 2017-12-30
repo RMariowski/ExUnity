@@ -103,7 +103,7 @@ namespace ExUnity
         #region Operator ==
 
         /// <summary>
-        /// ==
+        /// == operator
         /// </summary>
         /// <param name="point1">first point</param>
         /// <param name="point2">second point</param>
