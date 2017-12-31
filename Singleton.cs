@@ -48,11 +48,10 @@ namespace ExUnity
                     var ctors = type.GetConstructors();
                     if (ctors.Length > 0)
                     {
-                        throw new InvalidOperationException(
-                            string.Format(
-                                "{0} has at least one accesible ctor making it impossible to enforce singleton behaviour",
-                                type.Name));
+                        throw new InvalidOperationException(type.Name +
+                            " has at least one accessible ctor making it impossible to enforce singleton behavior.");
                     }
+
                     _instance = (T) Activator.CreateInstance(type, nonPublic: true);
                 }
             }

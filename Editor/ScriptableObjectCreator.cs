@@ -54,7 +54,7 @@ namespace ExUnity.Editor
             }
 
             string assetPathAndName =
-                AssetDatabase.GenerateUniqueAssetPath(string.Format("{0}/New {1}.asset", path, type));
+                AssetDatabase.GenerateUniqueAssetPath(path + "/" + type + ".asset");
             AssetDatabase.CreateAsset(asset, assetPathAndName);
             AssetDatabase.SaveAssets();
             EditorUtility.FocusProjectWindow();

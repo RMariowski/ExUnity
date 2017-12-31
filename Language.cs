@@ -85,7 +85,7 @@ namespace ExUnity
         {
             if (!IsInitialized)
                 throw new Exception("Language not initialized.");
-            return Items.ContainsKey(itemKey) ? Items[itemKey] : string.Format("[[{0}]]", itemKey);
+            return Items.ContainsKey(itemKey) ? Items[itemKey] : "[[" + itemKey + "]]";
         }
 
         #endregion
