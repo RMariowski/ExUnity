@@ -21,8 +21,7 @@ namespace ExUnity.Editor
 
             var sceneAsset = property.FindPropertyRelative("_sceneAsset");
             var sceneName = property.FindPropertyRelative("_sceneName");
-            position = EditorGUI.PrefixLabel(position,
-                GUIUtility.GetControlID(FocusType.Passive), label);
+            position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
 
             if (sceneAsset != null)
             {

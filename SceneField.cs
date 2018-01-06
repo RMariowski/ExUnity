@@ -15,13 +15,7 @@ namespace ExUnity
 
         #region Properties
 
-        /// <summary>
-        /// Returns scene name.
-        /// </summary>
-        public string SceneName
-        {
-            get { return _sceneName; }
-        }
+        public string SceneName => _sceneName;
 
         #endregion
 

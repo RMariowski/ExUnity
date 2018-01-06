@@ -4,22 +4,23 @@ namespace ExUnity
 {
     public static class Helpers
     {
-        #region Blank Image
+        #region Blank Texture
 
         /// <summary>
-        /// Creates image filled with one color.
+        /// Creates texture filled with one color.
         /// </summary>
-        /// <param name="width">width of image</param>
-        /// <param name="height">height of image</param>
-        /// <param name="color">color of image</param>
-        /// <returns>image as Texture2D if successful</returns>
-        public static Texture2D CreateBlankImage(int width, int height, Color color)
+        /// <param name="width">width of texture</param>
+        /// <param name="height">height of texture</param>
+        /// <param name="color">color of texture</param>
+        public static Texture2D CreateBlankTexture(int width, int height, Color color)
         {
             var result = new Texture2D(width, height);
+
             var colors = new Color[4];
             for (var i = 0; i < 4; i++)
                 colors[i] = color;
             result.SetPixels(colors);
+
             result.Apply();
             return result;
         }

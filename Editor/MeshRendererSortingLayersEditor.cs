@@ -75,7 +75,6 @@ namespace ExUnity.Editor
         /// <summary>
         /// Returns array of all sorting layer names.
         /// </summary>
-        /// <returns></returns>
         private static string[] GetSortingLayerNames()
         {
             var internalEditorUtilityType = typeof(InternalEditorUtility);

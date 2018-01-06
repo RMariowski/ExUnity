@@ -14,12 +14,9 @@ namespace ExUnity
 
         #region Properties
 
-        public static SystemLanguage SystemLanguage
-        {
-            get { return Application.systemLanguage; }
-        }
+        public static SystemLanguage SystemLanguage => Application.systemLanguage;
 
-        public SystemLanguage DefaultLanguage { get; set; }
+        public SystemLanguage DefaultLanguage { get; set; } = SystemLanguage.Unknown;
 
         public Language CurrentLanguage { get; private set; }
 
@@ -32,7 +29,6 @@ namespace ExUnity
         /// </summary>
         private LanguageManager()
         {
-            DefaultLanguage = SystemLanguage.Unknown;
         }
 
         #endregion
@@ -54,10 +50,8 @@ namespace ExUnity
         /// <summary>
         /// Creates and adds language to list of supported languages.
         /// </summary>
-        public void AddLanguage<T>() where T : Language, new()
-        {
-            AddLanguage(new T());
-        }
+        public void AddLanguage<T>() where T : Language, new() 
+            => AddLanguage(new T());
 
         #endregion
 
@@ -67,11 +61,8 @@ namespace ExUnity
         /// Checks whatever language is supported.
         /// </summary>
         /// <param name="languageId">ID of language to check</param>
-        /// <returns>True if language is supported, false otherwise.</returns>
-        private bool IsLanguageSupported(SystemLanguage languageId)
-        {
-            return _languages.ContainsKey(languageId);
-        }
+        private bool IsLanguageSupported(SystemLanguage languageId) 
+            => _languages.ContainsKey(languageId);
 
         #endregion
 
@@ -81,9 +72,9 @@ namespace ExUnity
         /// Sets current language to specified one.
         /// </summary>
         /// <param name="languageId">Language id to set</param>
-        /// <param name="initializeNow">If true, then immediately initializes new current language</param>
-        /// <param name="releaseCurrent">If true, then releases current language</param>
-        /// <returns>True if new current language has been set successfully</returns>
+        /// <param name="initializeNow">If true, then immediately initializes new current language.</param>
+        /// <param name="releaseCurrent">If true, then releases current language.</param>
+        /// <returns>True if new current language has been set successfully.</returns>
         public bool SetCurrentLanguage(SystemLanguage languageId, bool initializeNow = true,
             bool releaseCurrent = true)
         {
@@ -110,14 +101,14 @@ namespace ExUnity
 
         #endregion
 
-        #region Get Item
+        #region Get Localized Value
 
         /// <summary>
-        /// Gets item of language.
+        /// Gets localized value.
         /// </summary>
         /// <param name="itemKey">Item's key to get</param>
-        /// <returns>Value of language item if key exists. Otherwise it returns "[[KEY]]".</returns>
-        public string GetItem(string itemKey)
+        /// <returns>Localized value if key exists. Otherwise it returns "[[KEY]]".</returns>
+        public string GetLocalizedValue(string itemKey)
         {
             if (CurrentLanguage == null)
                 throw new Exception("Current language is not set.");

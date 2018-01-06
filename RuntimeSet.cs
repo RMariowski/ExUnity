@@ -7,24 +7,32 @@ namespace ExUnity
     {
         public List<T> Items = new List<T>();
 
+        #region Add
+
         /// <summary>
         /// Adds item to set.
         /// </summary>
-        /// <param name="item">Item to add</param>
+        /// <param name="item">item to add</param>
         public void Add(T item)
         {
             if (!Items.Contains(item))
                 Items.Add(item);
         }
 
+        #endregion
+
+        #region Remove
+
         /// <summary>
         /// Removes item from set.
         /// </summary>
-        /// <param name="item">Item to remove</param>
+        /// <param name="item">item to remove</param>
         public void Remove(T item)
         {
             if (Items.Contains(item))
                 Items.Remove(item);
         }
+
+        #endregion
     }
 }

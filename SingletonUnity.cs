@@ -13,21 +13,21 @@ namespace ExUnity
         #region Properties
 
         /// <summary>
-        /// Returns instance
+        /// Returns instance of singleton.
         /// </summary>
         public static T Instance
         {
             get
             {
-                if (_instance == null)
-                {
-                    _instance = FindObjectOfType<T>();
-                    if (_instance == null)
-                    {
-                        var obj = new GameObject {name = typeof(T).Name};
-                        _instance = obj.AddComponent<T>();
-                    }
-                }
+                if (_instance != null)
+                    return _instance;
+
+                _instance = FindObjectOfType<T>();
+                if (_instance != null)
+                    return _instance;
+
+                var obj = new GameObject {name = typeof(T).Name};
+                _instance = obj.AddComponent<T>();
                 return _instance;
             }
         }

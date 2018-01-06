@@ -49,11 +49,8 @@ namespace ExUnity
         /// </summary>
         /// <param name="point1">first point</param>
         /// <param name="point2">second point</param>
-        /// <returns>true if points are the same</returns>
-        public static bool Equals(Point point1, Point point2)
-        {
-            return point1.X.Equals(point2.X) && point1.Y.Equals(point2.Y);
-        }
+        public static bool Equals(Point point1, Point point2) 
+            => point1.X.Equals(point2.X) && point1.Y.Equals(point2.Y);
 
         #endregion
 
@@ -63,13 +60,8 @@ namespace ExUnity
         /// Checks if point is equal to object.
         /// </summary>
         /// <param name="obj">object</param>
-        /// <returns>true if point is equal to object</returns>
-        public override bool Equals(object obj)
-        {
-            if (!(obj is Point))
-                return false;
-            return Equals(this, (Point) obj);
-        }
+        public override bool Equals(object obj) 
+            => obj is Point && Equals(this, (Point) obj);
 
         #endregion
 
@@ -79,11 +71,8 @@ namespace ExUnity
         /// Checks if points are the same.
         /// </summary>
         /// <param name="point">other point</param>
-        /// <returns>true if points are the same</returns>
-        public bool Equals(Point point)
-        {
-            return Equals(this, point);
-        }
+        public bool Equals(Point point) 
+            => Equals(this, point);
 
         #endregion
 
@@ -92,11 +81,8 @@ namespace ExUnity
         /// <summary>
         /// Returns hash code of point.
         /// </summary>
-        /// <returns></returns>
-        public override int GetHashCode()
-        {
-            return X.GetHashCode() ^ Y.GetHashCode();
-        }
+        public override int GetHashCode() 
+            => X.GetHashCode() ^ Y.GetHashCode();
 
         #endregion
 
@@ -107,11 +93,8 @@ namespace ExUnity
         /// </summary>
         /// <param name="point1">first point</param>
         /// <param name="point2">second point</param>
-        /// <returns></returns>
-        public static bool operator ==(Point point1, Point point2)
-        {
-            return point1.X == point2.X && point1.Y == point2.Y;
-        }
+        public static bool operator ==(Point point1, Point point2) 
+            => point1.X == point2.X && point1.Y == point2.Y;
 
         #endregion
 
@@ -122,11 +105,8 @@ namespace ExUnity
         /// </summary>
         /// <param name="point1">first point</param>
         /// <param name="point2">second pint</param>
-        /// <returns></returns>
-        public static bool operator !=(Point point1, Point point2)
-        {
-            return !(point1 == point2);
-        }
+        public static bool operator !=(Point point1, Point point2) 
+            => !(point1 == point2);
 
         #endregion
     }

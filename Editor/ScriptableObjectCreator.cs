@@ -5,8 +5,13 @@ using UnityEngine;
 
 namespace ExUnity.Editor
 {
+    /// <summary>
+    /// Helper class to get rid of CreateAssetMenu attribute.
+    /// </summary>
     public static class ScriptableObjectCreator
     {
+        #region Create Instance
+
         /// <summary>
         /// Creates asset from selected ScriptableObject.
         /// </summary>
@@ -25,16 +30,25 @@ namespace ExUnity.Editor
             }
         }
 
+        #endregion
+
+        #region Validate Create Instance
+
         /// <summary>
         /// Checks whatever selected objects are ScriptableObjects.
         /// </summary>
-        /// <returns></returns>
         [MenuItem("Assets/Create/Instance", true)]
         public static bool ValidateCreateInstance()
         {
-            return Selection.objects.OfType<MonoScript>().Select(script => script.GetClass())
+            return Selection.objects
+                .OfType<MonoScript>()
+                .Select(script => script.GetClass())
                 .Any(type => type.IsSubclassOf(typeof(ScriptableObject)));
         }
+
+        #endregion
+
+        #region Create Asset
 
         /// <summary>
         /// Creates asset of ScriptableObject.
@@ -44,21 +58,25 @@ namespace ExUnity.Editor
         {
             var asset = ScriptableObject.CreateInstance(type);
             string path = AssetDatabase.GetAssetPath(Selection.activeObject);
-            if (path == "")
+            if (string.IsNullOrEmpty(path))
             {
                 path = "Assets";
             }
-            else if (Path.GetExtension(path) != "")
+            else if (!string.IsNullOrEmpty(Path.GetExtension(path)))
             {
-                path = path.Replace(Path.GetFileName(AssetDatabase.GetAssetPath(Selection.activeObject)), "");
+                string assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
+                string fileName = Path.GetFileName(assetPath);
+                if (fileName != null)
+                    path = path.Replace(fileName, "");
             }
 
-            string assetPathAndName =
-                AssetDatabase.GenerateUniqueAssetPath(path + "/" + type + ".asset");
+            string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath(path + "/" + type + ".asset");
             AssetDatabase.CreateAsset(asset, assetPathAndName);
             AssetDatabase.SaveAssets();
             EditorUtility.FocusProjectWindow();
             Selection.activeObject = asset;
         }
+
+        #endregion
     }
 }

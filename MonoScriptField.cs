@@ -15,13 +15,7 @@ namespace ExUnity
 
         #region Properties
 
-        /// <summary>
-        /// Returns script name.
-        /// </summary>
-        public string ScriptName
-        {
-            get { return _scriptName; }
-        }
+        public string ScriptName => _scriptName;
 
         #endregion
     }

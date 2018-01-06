@@ -37,7 +37,7 @@ namespace ExUnity
         #region Enqueue
 
         /// <summary>
-        /// Locks the queue and adds the IEnumerator to the queue
+        /// Locks the queue and adds the IEnumerator to the queue.
         /// </summary>
         /// <param name="action">IEnumerator function that will be executed from the main thread.</param>
         public void Enqueue(IEnumerator action)
@@ -51,7 +51,7 @@ namespace ExUnity
         #region Enqueue
 
         /// <summary>
-        /// Locks the queue and adds the Action to the queue
+        /// Locks the queue and adds the Action to the queue.
         /// </summary>
         /// <param name="action">function that will be executed from the main thread.</param>
         public void Enqueue(Action action)
@@ -67,7 +67,6 @@ namespace ExUnity
         /// Wraps function.
         /// </summary>
         /// <param name="action">function that will be wrapped.</param>
-        /// <returns></returns>
         private static IEnumerator ActionWrapper(Action action)
         {
             action();

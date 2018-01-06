@@ -9,12 +9,10 @@ namespace ExUnity
         /// <summary>
         /// Sets the value of the preference identified by key.
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
-        public static void SetBool(string key, bool value)
-        {
-            PlayerPrefs.SetInt(key, value ? 1 : 0);
-        }
+        /// <param name="key">key</param>
+        /// <param name="value">value</param>
+        public static void SetBool(string key, bool value) 
+            => PlayerPrefs.SetInt(key, value ? 1 : 0);
 
         #endregion
 
@@ -23,21 +21,17 @@ namespace ExUnity
         /// <summary>
         /// Returns the value corresponding to key in the preference file if it exists.
         /// </summary>
-        /// <param name="key"></param>
-        public static bool GetBool(string key)
-        {
-            return PlayerPrefs.GetInt(key) == 1;
-        }
+        /// <param name="key">key</param>
+        public static bool GetBool(string key) 
+            => PlayerPrefs.GetInt(key) == 1;
 
         /// <summary>
         /// Returns the value corresponding to key in the preference file if it exists.
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="defaultValue"></param>
-        public static bool GetBool(string key, bool defaultValue)
-        {
-            return PlayerPrefs.GetInt(key, defaultValue ? 1 : 0) == 1;
-        }
+        /// <param name="key">key</param>
+        /// <param name="defaultValue">Default value, when key doesn't exists.</param>
+        public static bool GetBool(string key, bool defaultValue) 
+            => PlayerPrefs.GetInt(key, defaultValue ? 1 : 0) == 1;
 
         #endregion
 
@@ -46,8 +40,8 @@ namespace ExUnity
         /// <summary>
         /// Sets the value of the preference identified by key.
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
+        /// <param name="key">key</param>
+        /// <param name="value">value</param>
         public static void SetLong(string key, long value)
         {
             int lowBits;
@@ -65,7 +59,7 @@ namespace ExUnity
         /// <summary>
         /// Returns the value corresponding to key in the preference file if it exists.
         /// </summary>
-        /// <param name="key"></param>
+        /// <param name="key">key</param>
         public static long GetLong(string key)
         {
             int lowBits = PlayerPrefs.GetInt(key + "_LowBits");
@@ -80,8 +74,8 @@ namespace ExUnity
         /// <summary>
         /// Returns the value corresponding to key in the preference file if it exists.
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="defaultValue"></param>
+        /// <param name="key">key</param>
+        /// <param name="defaultValue">Default value, when key doesn't exists.</param>
         public static long GetLong(string key, long defaultValue)
         {
             int lowBits;

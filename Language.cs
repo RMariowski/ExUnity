@@ -10,7 +10,7 @@ namespace ExUnity
 
         public string this[string key]
         {
-            get { return GetItem(key); }
+            get { return GetLocalizedValue(key); }
             set { SetItem(key, value); }
         }
 
@@ -18,7 +18,7 @@ namespace ExUnity
 
         #region Fields
 
-        protected readonly Dictionary<string, string> Items = new Dictionary<string, string>();
+        private readonly Dictionary<string, string> _items = new Dictionary<string, string>();
 
         #endregion
 
@@ -32,6 +32,9 @@ namespace ExUnity
 
         #region Constructor
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         protected Language()
         {
             Id = SystemLanguage.Unknown;
@@ -51,65 +54,43 @@ namespace ExUnity
 
         #endregion
 
-        #region Add Item
+        #region Add Localized Value
 
         /// <summary>
-        /// Adds item with specified key. If key already exists, overrides item.
+        /// Adds localized value with specified key. If key already exists, then value is override.
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="item">Value of language item</param>
-        public void AddItem(string key, string item)
-        {
-            Items[key] = item;
-        }
-
-        /// <summary>
-        /// Adds language item. If language item already exists, overrides it.
-        /// </summary>
-        /// <param name="languageItem">Language item to add.</param>
-        public void AddItem(LanguageItem languageItem)
-        {
-            AddItem(languageItem.First, languageItem.Second);
-        }
+        /// <param name="key">key of localized value</param>
+        /// <param name="value">localized value</param>
+        public void AddLocalizedValue(string key, string value) 
+            => _items[key] = value;
 
         #endregion
 
-        #region Get Item
+        #region Get Localized Value
 
         /// <summary>
-        /// Gets item of language.
+        /// Gets localized value.
         /// </summary>
-        /// <param name="itemKey">Item's key to get</param>
-        /// <returns>Value of language item if key exists. Otherwise it returns "[[KEY]]".</returns>
-        public string GetItem(string itemKey)
+        /// <param name="key">key of localized value</param>
+        /// <returns>Localized value if key exists. Otherwise it returns "[[KEY]]".</returns>
+        public string GetLocalizedValue(string key)
         {
             if (!IsInitialized)
                 throw new Exception("Language not initialized.");
-            return Items.ContainsKey(itemKey) ? Items[itemKey] : "[[" + itemKey + "]]";
+            return _items.ContainsKey(key) ? _items[key] : "[[" + key + "]]";
         }
 
         #endregion
 
-        #region Set Item
+        #region Set Localized Value
 
         /// <summary>
-        /// Sets language item with specified key. If key doesn't exists, adds item.
+        /// Sets localized value with specified key. If key doesn't exists, adds localized value.
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="item">Value of language item</param>
-        public void SetItem(string key, string item)
-        {
-            Items[key] = item;
-        }
-
-        /// <summary>
-        /// Sets language item.
-        /// </summary>
-        /// <param name="languageItem">Language item to set</param>
-        public void SetItem(LanguageItem languageItem)
-        {
-            SetItem(languageItem.First, languageItem.Second);
-        }
+        /// <param name="key">key of localized value</param>
+        /// <param name="value">localized value</param>
+        public void SetItem(string key, string value) 
+            => _items[key] = value;
 
         #endregion
 
@@ -122,7 +103,7 @@ namespace ExUnity
         /// </summary>
         public void Dispose()
         {
-            Items.Clear();
+            _items.Clear();
             IsInitialized = false;
         }
 

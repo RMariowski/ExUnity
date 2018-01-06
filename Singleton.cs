@@ -19,7 +19,7 @@ namespace ExUnity
         #region Properties
 
         /// <summary>
-        /// Returns instance.
+        /// Returns instance of singleton.
         /// </summary>
         public static T Instance
         {
@@ -36,24 +36,24 @@ namespace ExUnity
         #region Create Instance
 
         /// <summary>
-        /// Creates instance.
+        /// Creates instance of singleton.
         /// </summary>
         private static void CreateInstance()
         {
             lock (LockObj)
             {
-                if (_instance == null)
-                {
-                    var type = typeof(T);
-                    var ctors = type.GetConstructors();
-                    if (ctors.Length > 0)
-                    {
-                        throw new InvalidOperationException(type.Name +
-                            " has at least one accessible ctor making it impossible to enforce singleton behavior.");
-                    }
+                if (_instance != null)
+                    return;
 
-                    _instance = (T) Activator.CreateInstance(type, nonPublic: true);
+                var type = typeof(T);
+                var constructors = type.GetConstructors();
+                if (constructors.Length > 0)
+                {
+                    throw new InvalidOperationException(type.Name +
+                                                        " has at least one accessible constructor making it impossible to enforce singleton behavior.");
                 }
+
+                _instance = (T) Activator.CreateInstance(type, nonPublic: true);
             }
         }
 
