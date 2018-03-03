@@ -41,15 +41,11 @@ namespace ExUnity
         /// </summary>
         public virtual void Awake()
         {
-            if (_instance == null)
-            {
-                _instance = this as T;
-                DontDestroyOnLoad(gameObject);
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+            if (_instance != null)
+                return;
+
+            _instance = this as T;
+            DontDestroyOnLoad(gameObject);
         }
 
         #endregion
