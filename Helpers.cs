@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace ExUnity
 {
@@ -26,5 +28,45 @@ namespace ExUnity
         }
 
         #endregion
+
+        public static T FindObjectOfType<T>()
+        {
+            for (var i = 0; i < SceneManager.sceneCount; i++)
+            {
+                var s = SceneManager.GetSceneAt(i);
+                if (!s.isLoaded)
+                    continue;
+
+                var allGameObjects = s.GetRootGameObjects();
+                foreach (var go in allGameObjects)
+                {
+                    var component = go.GetComponentInChildren<T>(true);
+                    if (component == null)
+                        continue;
+
+                    return component;
+                }
+            }
+
+            return default(T);
+        }
+
+        public static List<T> FindObjectsOfTypeAll<T>()
+        {
+            var results = new List<T>();
+            for (var i = 0; i < SceneManager.sceneCount; i++)
+            {
+                var s = SceneManager.GetSceneAt(i);
+                if (!s.isLoaded)
+                    continue;
+
+                var allGameObjects = s.GetRootGameObjects();
+                foreach (var go in allGameObjects)
+                {
+                    results.AddRange(go.GetComponentsInChildren<T>(true));
+                }
+            }
+            return results;
+        }
     }
 }
