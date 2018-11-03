@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace ExUnity
+namespace ExUnity.Localization
 {
     [RequireComponent(typeof(Text))]
     public class LocalizedText : MonoBehaviour

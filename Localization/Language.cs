@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ExUnity
+namespace ExUnity.Localization
 {
     public abstract class Language : IDisposable
     {
